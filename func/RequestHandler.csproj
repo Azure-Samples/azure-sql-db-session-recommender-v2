@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <UserSecretsId>f9d76b6e-3000-45fa-8f99-dec6e7819a55</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>    
+    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.13" />     
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.6.0" />    
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Sql" Version="3.0.461" />    
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.16.3" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.20.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="Dapper" Version="2.1.4" />    
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="host.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="local.settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+</Project>

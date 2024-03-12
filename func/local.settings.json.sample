@@ -1,0 +1,12 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+        "AZURE_SQL_CONNECTION_STRING": "Server=.database.windows.net;Initial Catalog=;Persist Security Info=False;User ID=session_recommender_app;Password=unEno!h5!&*KP420xds&@P901afb$^M;MultipleActiveResultSets=False;Encrypt=True;Connection Timeout=30;",
+        "AZURE_OPENAI_ENDPOINT": "https://.openai.azure.com/",
+        "AZURE_OPENAI_KEY": "",
+        "AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT_NAME": "embeddings",
+        "AZURE_OPENAI_GPT_DEPLOYMENT_NAME": "gpt"        
+    }
+}

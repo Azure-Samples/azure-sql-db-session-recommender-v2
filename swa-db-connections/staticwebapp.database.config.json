@@ -1,0 +1,131 @@
+{
+  "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.9.7/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "connection-string": "@env('MSSQL')",
+    "options": {
+      "set-session-context": false
+    }
+  },
+  "runtime": {
+    "rest": {
+      "enabled": true,
+      "path": "/rest",
+      "request-body-strict": true
+    },
+    "graphql": {
+      "enabled": true,
+      "path": "/graphql",
+      "allow-introspection": true
+    },
+    "host": {
+      "cors": {
+        "origins": [
+          "*"
+        ],
+        "allow-credentials": false
+      },
+      "authentication": {
+        "provider": "StaticWebApps"
+      },
+      "mode": "development"
+    }
+  },
+  "entities": {
+    "FindRelatedSessions": {
+      "source": {
+        "object": "web.find_sessions",
+        "type": "stored-procedure",
+        "parameters": {
+          "text": "",
+          "top": 10,
+          "min_similarity": 0.75
+        }
+      },
+      "graphql": {
+        "enabled": false,
+        "operation": "query"
+      },
+      "rest": {
+        "enabled": true,
+        "path": "/find",
+        "methods": [
+          "post"
+        ]
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    },
+    "GetSessionsCount": {
+      "source": {
+        "object": "web.get_sessions_count",
+        "type": "stored-procedure"
+      },
+      "graphql": {
+        "enabled": false,
+        "operation": "query"
+      },
+      "rest": {
+        "enabled": true,
+        "path": "/sessions-count",
+        "methods": [
+          "get"
+        ]
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "execute"
+            }
+          ]
+        }
+      ]
+    },
+    "Session": {
+      "source": {
+        "object": "web.sessions",
+        "type": "table"
+      },
+      "graphql": {
+        "enabled": true,
+        "type": {
+          "singular": "Session",
+          "plural": "Sessions"
+        }
+      },
+      "rest": {
+        "enabled": true,
+        "path": "/sessions"
+      },
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [
+            {
+              "action": "read"
+            }
+          ]
+        },
+        {
+          "role": "authenticated",
+          "actions": [
+            {
+              "action": "*"
+            }
+          ]
+        }
+
+      ]
+    }
+  }
+}
