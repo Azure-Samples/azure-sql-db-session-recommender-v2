@@ -25,6 +25,10 @@ description: Build a session recommender using Jamstack and Event-Driven archite
 
 # Session Assistant Sample - Retrieveal Augmented Generation with Azure SQL DB and OpenAI
 
+This sample demonstrates how to build a session recommender using Jamstack and Event-Driven architecture, using Azure SQL DB to store and search vectors embeddings generated using OpenAI. The solution is built using Azure Static Web Apps, Azure Functions, Azure SQL Database, and Azure OpenAI.
+
+A fully working, production ready, version of this sample, that has been used at [VS Live](https://vslive.com/) conferences, is available here: https://ai.lasvegas.vslive.com/
+
 This repository is a evoution of the [Session Recommender](https://github.com/azure-samples/azure-sql-db-session-recommender) sample. In addition to vector search, also Retrival Augmented Generation (RAG) is used to generate the response to the user query. If you are completely new to this topic, you may want to start there, and then come back here.
 
 ![Architecture Diagram](./_docs/session-recommender-architecture.png)
