@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach to .NET Functions",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:azureFunctions.pickProcess}"
+    },
+    {
+      "name": "Run web app",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "swa",
+      "runtimeArgs": ["start"],
+      "presentation": {
+        "hidden": false,
+        "group": "Frontend",
+        "order": 1
+      },
+      "preLaunchTask": "npm: install"
+    }
+  ]
+}
