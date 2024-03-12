@@ -7,6 +7,7 @@
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <ModelCollation>1033, CI</ModelCollation>
     <IsChangeTrackingOn>True</IsChangeTrackingOn>
+    <BuildDependsOn>CopyDacpac</BuildDependsOn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.SqlServer.Dacpacs.Azure.Master">
@@ -40,11 +41,13 @@
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
   </ItemGroup>
-  <Target Name="BeforeBuild">
-    <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
-  </Target>
-  <Target Name="AfterBuild">
+  <ItemGroup>
+    <DeploySpecificFolders Include="$(OutputPath)\*.dacpac">
+      <FolderToCopyTo>$(ProjectDir)/../</FolderToCopyTo>
+    </DeploySpecificFolders>
+  </ItemGroup>
+  <Target Name="CopyDacpac" AfterTargets="Build">
     <Message Text="Copying dacpacs..." Importance="high"/>
-    <Copy SourceFiles="$(OutputPath)\*.dacpac" DestinationFolder="$(OutputPath)\..\..\.."/>
+    <Copy SourceFiles="@(DeploySpecificFolders)" DestinationFolder="%(DeploySpecificFolders.FolderToCopyTo)"/>
   </Target>
 </Project>
