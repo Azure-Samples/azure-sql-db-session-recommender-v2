@@ -23,7 +23,7 @@ description: Build a session recommender using Jamstack and Event-Driven archite
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
 
-# Session Assistant Sample - Retrieveal Augmented Generation with Azure SQL DB and OpenAI
+# Session Assistant Sample - Retriveal Augmented Generation with Azure SQL DB and OpenAI
 
 This sample demonstrates how to build a session recommender using Jamstack and Event-Driven architecture, using Azure SQL DB to store and search vectors embeddings generated using OpenAI. The solution is built using Azure Static Web Apps, Azure Functions, Azure SQL Database, and Azure OpenAI.
 
