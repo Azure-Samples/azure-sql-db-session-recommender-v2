@@ -39,7 +39,7 @@ export const About = () => {
     <>
       <FancyText>
         Source code and and related articles are <a href="https://github.com/Azure-Samples/azure-sql-db-session-recommender-v2">available on GitHub.</a>{" "}
-        The AI model used generate embeddings is the <i>text-embedding-ada-002</i> and the AI model used to process and generate natural language content is <i>gpt-4 turbo</i>.
+        The AI model used generate embeddings is the <i>text-embedding-ada-002</i> and the AI model used to process and generate natural language content is <i>gpt-35-turbo</i>.
       </FancyText>
       <Suspense fallback={showSessionCount()}>
         <Await
