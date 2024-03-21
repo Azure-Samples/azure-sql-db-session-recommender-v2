@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build">
-  <Sdk Name="Microsoft.Build.Sql" Version="0.1.12-preview" />
+  <Sdk Name="Microsoft.Build.Sql" Version="0.1.15-preview" />
   <PropertyGroup>
     <Name>session_recommender_v2</Name>
     <ProjectGuid>{A3BB1F3B-AAAF-4735-A73F-46B26F8B66C0}</ProjectGuid>

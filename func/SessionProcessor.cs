@@ -17,8 +17,9 @@ public class Item
     [JsonPropertyName("require_embeddings_update")]
     public bool RequireEmbeddingsUpdate { get; set; }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
+        if (obj is null) return false;
         if (obj is not Item that) return false;         
         return Id == that.Id;
     }

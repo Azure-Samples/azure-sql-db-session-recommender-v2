@@ -156,8 +156,16 @@ once finished, create a `./func/local.settings.json` and `.env` starting from pr
 From the sample root folder run:
 
 ```bash
-swa start ./client --api-location ./func --data-api-location ./swa-db-connections
+swa start 
 ```
+
+and once the local Static Web App environment is running, you can connect to
+
+```text
+http://localhost:4280/
+```
+
+and test the solution locally.
 
 ## Fluent UI
 

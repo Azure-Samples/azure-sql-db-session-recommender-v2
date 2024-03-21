@@ -1,0 +1,3 @@
+Package: dotnet* aspnet* netstandard*
+Pin: origin "archive.ubuntu.com"
+Pin-Priority: -10
