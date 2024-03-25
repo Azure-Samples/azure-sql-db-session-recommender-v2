@@ -116,8 +116,8 @@ select top(@top)
     a.title,
     a.abstract,
     a.external_id,
-    a.start_time_PST,
-    a.end_time_PST,
+    a.start_time,
+    a.end_time,
     a.recording_url,
     isnull((select top (1) speakers from cteSpeakers where session_id = a.id), '[]') as speakers,
     r.cosine_similarity
