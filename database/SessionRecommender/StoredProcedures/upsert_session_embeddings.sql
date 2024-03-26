@@ -16,7 +16,13 @@ begin transaction
     select @id, cast([key] as int), cast([value] as float) 
     from openjson(@embeddings)
 
-    update web.sessions set require_embeddings_update = 0 where id = @id
+    update 
+        web.sessions 
+    set 
+        embeddings = @embeddings,
+        require_embeddings_update = 0        
+    where 
+        id = @id
 
 commit
 GO

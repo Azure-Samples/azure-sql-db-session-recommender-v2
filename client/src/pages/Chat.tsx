@@ -1,22 +1,49 @@
 import {
-  Body1,
   Card,
-  CardHeader,
   Textarea,
   TextareaProps,
-  Text,
   makeStyles,
-  CardFooter,
   Spinner,
   Title2
 } from "@fluentui/react-components";
 import { SendRegular } from "@fluentui/react-icons";
 import { useState } from "react";
-import { ActionFunctionArgs, useFetcher } from "react-router-dom";
+import { ActionFunctionArgs, isRouteErrorResponse, useFetcher, useRouteError } from "react-router-dom";
 import { ask } from "../api/chat";
 import { FancyText } from "../components/FancyText";
 import { PrimaryButton } from "../components/PrimaryButton";
 import ReactMarkdown from "react-markdown";
+
+var isThinking:boolean = false;
+var intervalId = 0
+var thinkingTicker = 0;
+var thinkingMessages:string[] = [
+  "Analyzing the question...",
+  "Thinking...",
+  "Querying the database...",
+  "Extracting embeddings...",
+  "Finding vectors in the latent space...", 
+  "Identifying context...", 
+  "Analyzing results...",  
+  "Finding the best answer...", 
+  "Formulating response...",
+  "Double checking the answer...",
+  "Correcting spelling...",
+  "Doing an internal review...",
+  "Checking for errors...",
+  "Validating the answer...",
+  "Adding more context...",
+  "Analyzing potential response...",
+  "Re-reading the original question...",
+  "Adding more details...",
+  "Improving the answer...",
+  "Making it nice and polished...",
+  "Removing typos...",
+  "Adding punctuation...",
+  "Checking grammar...",
+  "Adding context...",
+  "Sending response..."
+]
 
 const useClasses = makeStyles({
   container: {},
@@ -73,10 +100,11 @@ export const Chat = () => {
   const fetcher = useFetcher<Awaited<ReturnType<typeof action>>>();
   const classes = useClasses();
 
+  const [thinking, setThinking] = useState(thinkingMessages[0]);
+  const [prompt, setPrompt] = useState("");
+
   const submitting = fetcher.state !== "idle";
   const data = fetcher.data;  
-
-  const [prompt, setPrompt] = useState("");
 
   const onChange: TextareaProps["onChange"] = (_, data) =>
     setPrompt(() => data.value);
@@ -93,6 +121,24 @@ export const Chat = () => {
     }
   };
 
+  if (submitting && !isThinking) {
+    isThinking = true;
+    thinkingTicker = 0;
+    setThinking(thinkingMessages[thinkingTicker]);
+    const updateThinking = () => {     
+      thinkingTicker += 1;   
+      var i = thinkingTicker > thinkingMessages.length - 1 ? 0 : thinkingTicker;
+      setThinking(thinkingMessages[i]);      
+    }
+    intervalId = setInterval(updateThinking, 2000);
+  }
+
+  if (!submitting && isThinking) {
+    isThinking = false;
+    clearInterval(intervalId);
+    setThinking(thinkingMessages[0]);
+  }
+
   return (
     <div className={classes.container}>
       <div>
@@ -101,8 +147,7 @@ export const Chat = () => {
           Ask questions to the AI model in natural language and get meaningful answers 
           to help you navigate the conferences sessions and find the best ones for you.           
           Thanks to <a href="https://en.wikipedia.org/wiki/Prompt_engineering" target="_blank">Prompt Engineering</a> and <a href="https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview" target="_blank">Retrieval Augmented Generation (RAG) </a> finding
-          details and recommendations on what session to attend is easier than ever. Please note that the AI model will remember your questions and answers to improve the quality of the answers and get more context on your requests.           
-          If you want to start from scratch, <a href="/">click here</a> or refresh the page.
+          details and recommendations on what session to attend is easier than ever.
           </>
         </FancyText>        
       </div>
@@ -126,8 +171,8 @@ export const Chat = () => {
           >
             Ask
           </PrimaryButton>
-          {submitting && <Spinner label="Thinking..." />}
-        </fetcher.Form>
+          {submitting && <Spinner label={thinking} />}
+        </fetcher.Form>        
       </div>
       <div className={classes.answersArea}>
         {!submitting && data && <Answers data={data} />}
@@ -135,3 +180,23 @@ export const Chat = () => {
     </div>
   );
 };
+
+export const ChatError = () => {
+  const error = useRouteError();
+  console.error(error);
+  if (isRouteErrorResponse(error)) {
+    return(
+    <div>
+      <Title2>
+      {error.status} - {error.statusText} {error.data.statusText}
+      </Title2>
+      <FancyText>
+        Sorry, there was a problem while processing your request. Please try again.
+      </FancyText>
+    </div>
+    )
+  }
+  else {
+    throw error;
+  }
+}

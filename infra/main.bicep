@@ -73,7 +73,6 @@ module openAI 'app/openai.bicep' = {
         model: {
           format: 'OpenAI'
           name: 'text-embedding-ada-002'
-          version: '2'
         }
         capacity: 30
       }
@@ -81,8 +80,7 @@ module openAI 'app/openai.bicep' = {
         name: gptDeploymentName
         model: {
           format: 'OpenAI'
-          name: 'gpt-35-turbo'          
-          version: '0613'
+          name: 'gpt-35-turbo'
         }
         capacity: 120
       }
@@ -128,8 +126,7 @@ module hostingPlan 'core/host/appserviceplan.bicep' = {
     location: location
     name: !empty(hostingPlanName) ? hostingPlanName : '${abbrs.webServerFarms}${resourceToken}'
     sku: {
-      name: 'Y1'
-      tier: 'Dynamic'
+      name: 'EP1'
     }
     kind: 'linux'
   }

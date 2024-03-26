@@ -7,8 +7,8 @@ import siteConfig from "../site";
 function formatSubtitle(session: SessionInfo) {
   const speakers = JSON.parse(session.speakers).join(", ");
 
-  const startTime = dayjs(session.start_time_PST);
-  const endTime = dayjs(session.end_time_PST);
+  const startTime = dayjs(session.start_time);
+  const endTime = dayjs(session.end_time);
 
   const day = startTime.format("dddd")
   const start = startTime.format("hh:mm A");
@@ -18,12 +18,9 @@ function formatSubtitle(session: SessionInfo) {
 }
 
 function formatSessionLink(session: SessionInfo) {
-    const startTime = dayjs(session.start_time_PST);
+    const url = new URL(`#${session.external_id}`, siteConfig.sessionUrl);
 
-    const day = startTime.format("D")    
-    const url = new URL(`session-list.aspx?EventDay=${day}`, siteConfig.sessionUrl);
-
-    return url;
+    return url.toString();
 }
 
 export const Session = ({ session }: { session: SessionInfo }) => {
