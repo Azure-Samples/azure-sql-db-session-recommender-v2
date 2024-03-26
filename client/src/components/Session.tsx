@@ -18,10 +18,7 @@ function formatSubtitle(session: SessionInfo) {
 }
 
 function formatSessionLink(session: SessionInfo) {
-    const startTime = dayjs(session.start_time);
-
-    const day = startTime.format("D")    
-    const url = new URL(`session-list.aspx?EventDay=${day}`, siteConfig.sessionUrl);
+    const url = new URL(`#${session.external_id}`, siteConfig.sessionUrl);
 
     return url.toString();
 }
