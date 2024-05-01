@@ -35,8 +35,9 @@ This repository is a evoution of the [Session Recommender](https://github.com/az
 A session recommender built using
 
 - [Azure Static Web Apps](https://learn.microsoft.com/en-us/azure/static-web-apps/overview)
-- [Azure OpenAI](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
-- [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview?pivots=programming-language-csharp)
+- [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/)
+- [Azure Functions](https://learn.microsoft.com/azure/azure-functions/functions-overview?pivots=programming-language-csharp)
+- [Azure Functions SQL Trigger Binding](https://learn.microsoft.com/azure/azure-functions/functions-bindings-azure-sql-trigger)
 - [Azure SQL Database](https://www.sqlservercentral.com/articles/the-sql-developer-experience-beyond-rdbms)
 - [Data API builder](https://aka.ms/dab)
 

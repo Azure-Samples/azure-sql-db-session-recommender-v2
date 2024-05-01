@@ -1,6 +1,7 @@
 const siteConfig = {
     name: 'Cool SQL+AI Conference',
-    website: 'http://localhost:4280',
+    website: location.origin,
+    sessionUrl: location.origin
 }
 
 export default siteConfig;

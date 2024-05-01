@@ -18,7 +18,8 @@ function formatSubtitle(session: SessionInfo) {
 }
 
 function formatSessionLink(session: SessionInfo) {
-    const url = new URL(`session/${session.external_id}`, siteConfig.website);
+    const url = new URL(`#${session.external_id}`, siteConfig.sessionUrl);
+
     return url.toString();
 }
 
