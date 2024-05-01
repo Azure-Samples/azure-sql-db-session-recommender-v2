@@ -5,13 +5,8 @@ create procedure [web].[find_sessions]
 as
 if (@text is null) return;
 
-declare @sid as int = -1;
-if (@text like N'***%') begin    
-    set @text = trim(cast(substring(@text, 4, len(@text) - 3) as nvarchar(max)));    
-end else begin
-    insert into web.searched_text (searched_text) values (@text);
-    set @sid = scope_identity();
-end;
+insert into web.searched_text (searched_text) values (@text);
+declare @sid int = scope_identity();
 
 declare @startTime as datetime2(7) = sysdatetime()
 
@@ -116,8 +111,8 @@ select top(@top)
     a.title,
     a.abstract,
     a.external_id,
-    a.start_time_PST,
-    a.end_time_PST,
+    a.start_time,
+    a.end_time,
     a.recording_url,
     isnull((select top (1) speakers from cteSpeakers where session_id = a.id), '[]') as speakers,
     r.cosine_similarity

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build">
-  <Sdk Name="Microsoft.Build.Sql" Version="0.1.15-preview" />
+  <Sdk Name="Microsoft.Build.Sql" Version="0.1.14-preview" />
   <PropertyGroup>
     <Name>session_recommender_v2</Name>
     <ProjectGuid>{A3BB1F3B-AAAF-4735-A73F-46B26F8B66C0}</ProjectGuid>
@@ -9,13 +9,6 @@
     <IsChangeTrackingOn>True</IsChangeTrackingOn>
     <BuildDependsOn>CopyDacpac</BuildDependsOn>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SqlServer.Dacpacs.Azure.Master">
-      <Version>160.0.0</Version>
-      <GeneratePathProperty>True</GeneratePathProperty>
-      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
-    </PackageReference>
-  </ItemGroup>
   <ItemGroup>
     <SqlCmdVariable Include="APP_USER_PASSWORD">
       <Value>$(SqlCmdVar__4)</Value>
@@ -46,8 +39,18 @@
       <FolderToCopyTo>$(ProjectDir)/../</FolderToCopyTo>
     </DeploySpecificFolders>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="session_recommender_v2_1.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SqlServer.Dacpacs.Azure.Master">
+      <Version>160.0.0</Version>
+      <GeneratePathProperty>True</GeneratePathProperty>
+      <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
+    </PackageReference>
+  </ItemGroup>
   <Target Name="CopyDacpac" AfterTargets="Build">
-    <Message Text="Copying dacpacs..." Importance="high"/>
-    <Copy SourceFiles="@(DeploySpecificFolders)" DestinationFolder="%(DeploySpecificFolders.FolderToCopyTo)"/>
+    <Message Text="Copying dacpacs..." Importance="high" />
+    <Copy SourceFiles="@(DeploySpecificFolders)" DestinationFolder="%(DeploySpecificFolders.FolderToCopyTo)" />
   </Target>
 </Project>

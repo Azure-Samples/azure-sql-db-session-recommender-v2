@@ -9,8 +9,8 @@ export type SessionInfo = {
   external_id: string;
   title: string;
   abstract: string;
-  start_time_PST: string;
-  end_time_PST: string;
+  start_time: string;
+  end_time: string;
   cosine_similarity: number;
   speakers: string;
 };
