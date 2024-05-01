@@ -117,17 +117,31 @@ azd pipeline config
 Add a new row to the `Sessions` table using the following SQL statement (you can use tools like [Azure Data Studio](https://learn.microsoft.com/en-us/azure-data-studio/quickstart-sql-database) or [SQL Server Management Studio](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-ssms?view=azuresql) to connect to the database. No need to install them if you don't want. In that case you can use the [SQL Editor in the Azure Portal](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-portal?view=azuresql)):
 
 ```sql
+insert into web.speakers
+    (id, full_name, require_embeddings_update)
+values
+    (5000, 'John Doe', 1)
+go
+
 insert into web.sessions 
-    (title, abstract, external_id, start_time_PST, end_time_PST, require_embeddings_update)
+    (id, title, abstract, external_id, start_time, end_time, require_embeddings_update)
 values
     (
+        1000,
         'Building a session recommender using OpenAI and Azure SQL', 
-        'In this fun and demo-driven session you’ll learn how to integrate Azure SQL with OpenAI to generate text embeddings, store them in the database, index them and calculate cosine distance to build a session recommender. And once that is done, you’ll publish it as a REST and GraphQL API to be consumed by a modern JavaScript frontend. Sounds pretty cool, uh? Well, it is!',
+        'In this fun and demo-driven session you''ll learn how to integrate Azure SQL with OpenAI to generate text embeddings, store them in the database, index them and calculate cosine distance to build a session recommender. And once that is done, you’ll publish it as a REST and GraphQL API to be consumed by a modern JavaScript frontend. Sounds pretty cool, uh? Well, it is!',
         'S1',
-        '2024-03-10 10:00:00',
-        '2024-03-10 11:00:00',
+        '2024-06-01 10:00:00',
+        '2024-06-01 11:00:00',
         1
     )
+go
+
+insert into web.sessions_speakers
+    (session_id, speaker_id)
+values
+    (1000, 5000)
+go
 ```
 
 immediately the deployed Azure Function will get executed in response to the `INSERT` statement. The Azure Function will call the OpenAI service to generate the text embedding for the session title and abstract, and then store the embedding in the database, specifically in the `web.sessions_embeddings` table.
