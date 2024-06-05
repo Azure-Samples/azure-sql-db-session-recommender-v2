@@ -15,7 +15,6 @@ products:
 - sql-server
 - azure-sql-managed-instance
 - azure-sqlserver-vm
-- dotnet
 - azure-openai
 urlFragment: azure-sql-db-session-recommender-v2
 name: Retrieval Augmented Generation with Azure SQL DB and OpenAI
