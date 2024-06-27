@@ -73,7 +73,7 @@ public class SessionProcessor(OpenAIClient openAIClient, SqlConnection conn, ILo
                         Payload = c.Item.Title + ':' + c.Item.Abstract                       
                     };
 
-        await ProcessChanges(ci, "web.sessions", "web.upsert_session_embeddings", logger);
+        await ProcessChanges(ci, "web.sessions", "web.update_session_embeddings", logger);
     }
 
     [Function(nameof(SpeakerTrigger))]
@@ -92,7 +92,7 @@ public class SessionProcessor(OpenAIClient openAIClient, SqlConnection conn, ILo
                         RequireEmbeddingsUpdate = c.Item.RequireEmbeddingsUpdate
                     };
 
-        await ProcessChanges(ci, "web.speakers", "web.upsert_speaker_embeddings", logger);          
+        await ProcessChanges(ci, "web.speakers", "web.update_speaker_embeddings", logger);          
     }
 
     private async Task ProcessChanges(IEnumerable<ChangedItem> changes, string referenceTable, string upsertStoredProcedure, ILogger logger)
