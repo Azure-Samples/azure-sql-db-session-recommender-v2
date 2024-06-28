@@ -15,8 +15,8 @@ products:
 - sql-server
 - azure-sql-managed-instance
 - azure-sqlserver-vm
-- dotnet
 - azure-openai
+urlFragment: azure-sql-db-session-recommender-v2
 name: Retrieval Augmented Generation with Azure SQL DB and OpenAI
 description: Build a session recommender using Jamstack and Event-Driven architecture, using Azure SQL DB to store and search vectors embeddings generated using OpenAI
 ---
