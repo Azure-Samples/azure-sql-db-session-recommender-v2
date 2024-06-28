@@ -24,7 +24,7 @@ description: Build a session recommender using Jamstack and Event-Driven archite
 
 This sample demonstrates how to build a session recommender using Jamstack and Event-Driven architecture, using Azure SQL DB to store and search vectors embeddings generated using OpenAI. The solution is built using Azure Static Web Apps, Azure Functions, Azure SQL Database, and Azure OpenAI.
 
-A fully working, production ready, version of this sample, that has been used at [VS Live](https://vslive.com/) conferences, is available here: https://ai.lasvegas.vslive.com/
+A fully working, production ready, version of this sample, that has been used at [VS Live](https://vslive.com/) conferences, is available here: https://icy-beach-0b0dc380f.5.azurestaticapps.net/
 
 ![Retrieval Augmented Generator flow](./_docs/rag.png)
 
@@ -45,6 +45,21 @@ For more details on the solution check also the following articles:
 
 - [How I built a session recommender in 1 hour using Open AI](https://dev.to/azure/how-i-built-a-session-recommender-in-1-hour-using-open-ai-5419)
 - [Vector Similarity Search with Azure SQL database and OpenAI](https://devblogs.microsoft.com/azure-sql/vector-similarity-search-with-azure-sql-database-and-openai/)
+
+# Native or Classic ?
+Azure SQL database can be used to easily and quickly perform vector similarity search. There are two options for this: a native option and a classic option.
+
+The **native option** is to use the new Vector Functions, recently introduced in Azure SQL database. Vector Functions are a set of functions that can be used to perform vector operations directly in the database. 
+
+> [!NOTE]  
+> Vector Functions are in Early Adopter Preview. Get access to the preview via https://aka.ms/azuresql-vector-eap-announcement
+
+![](_assets/azure-sql-cosine-similarity-native.gif)
+
+The **classic option** is to use the classic T-SQL to perform vector operations, with the support for columnstore indexes for getting good performances.
+
+> [!IMPORTANT]  
+> This branch (the `main` branch) uses the native vector support in Azure SQL. If you want to use the classic T-SQL, switch to the `classic` branch.
 
 # Deploy the sample using the Azure Developer CLI (azd) template
 
