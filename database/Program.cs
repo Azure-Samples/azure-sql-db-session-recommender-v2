@@ -19,7 +19,7 @@ namespace Database.Deploy
             var connectionString = Env.GetString("MSSQL");
             
             if (string.IsNullOrEmpty(connectionString)) {
-                Console.WriteLine("ERROR: 'ConnectionString' enviroment variable not set or empty.");
+                Console.WriteLine("ERROR: 'MSSQL' enviroment variable not set or empty.");
                 Console.WriteLine("You can create an .env file in parent folder that sets the 'MSSQL' environment variable; then run this app again.");                
                 return 1;
             }
@@ -41,6 +41,7 @@ namespace Database.Deploy
             Dictionary<string, string> variables = new() {
                 {"OPENAI_URL", Env.GetString("OPENAI_URL")},
                 {"OPENAI_KEY", Env.GetString("OPENAI_KEY")}
+                {"OPENAI_MODEL", Env.GetString("OPENAI_MODEL")}
             };
 
             Console.WriteLine("Starting deployment...");

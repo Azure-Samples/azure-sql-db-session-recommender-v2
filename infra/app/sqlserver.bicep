@@ -102,7 +102,6 @@ resource createDBScript2 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
         secureValue: appUserPassword
       }
     ]
-    scriptContent: loadTextContent('../../database/setup-database.ps1')  
   }
 }
 

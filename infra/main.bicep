@@ -45,9 +45,11 @@ param logAnalyticsName string = ''
 @description('Flag to Use keyvault to store and use keys')
 param useKeyVault bool = true
 
+param myTags object = {}
+
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var tags = { 'azd-env-name': environmentName }
+var tags = union({ 'azd-env-name': environmentName }, myTags)
 var rgName = 'rg-${environmentName}'
 
 // Organize resources in a resource group
@@ -126,7 +128,7 @@ module hostingPlan 'core/host/appserviceplan.bicep' = {
     location: location
     name: !empty(hostingPlanName) ? hostingPlanName : '${abbrs.webServerFarms}${resourceToken}'
     sku: {
-      name: 'EP1'
+      name: 'B1'
     }
     kind: 'linux'
   }
