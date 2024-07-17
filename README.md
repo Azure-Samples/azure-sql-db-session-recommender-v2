@@ -128,6 +128,16 @@ Using the Azure Developer CLI, you can setup your pipelines, monitor your applic
 azd pipeline config
 ```
 
+## Deploy the database
+
+Since the database is using features that are in Private Preview, it must be deployed manually. After all resources have been deployed, get the database connection string and OpenAI endpoint and key and create a `.env` file from the `.env.sample` file. Once that is done, go into the `database` folder and run the following command:
+
+```bash
+dotnet run
+```
+
+The .NET application will create the database schema and the required objects.
+
 ## Test the solution
 
 Add a new row to the `Sessions` table using the following SQL statement (you can use tools like [Azure Data Studio](https://learn.microsoft.com/en-us/azure-data-studio/quickstart-sql-database) or [SQL Server Management Studio](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-ssms?view=azuresql) to connect to the database. No need to install them if you don't want. In that case you can use the [SQL Editor in the Azure Portal](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-portal?view=azuresql)):
@@ -183,7 +193,7 @@ npm install
 
 once finished, create a `./func/local.settings.json` and `.env` starting from provided samples files, and fill out the settings using the correct values for your environment.
 
-From the sample root folder run:
+Go back to the sample root folder and then run:
 
 ```bash
 swa start 
