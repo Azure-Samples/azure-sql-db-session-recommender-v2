@@ -1,7 +1,7 @@
 create or alter procedure [web].[find_sessions]
 @text nvarchar(max),
 @top int = 10,
-@min_similarity decimal(19,16) = 0.75
+@min_similarity decimal(19,16) = 0.35
 as
 if (@text is null) return;
 
@@ -23,8 +23,7 @@ with cteSimilarSpeakers as
 (
     select top(@top)
         sp.id as speaker_id, 
-        -- Optimized as per https://platform.openai.com/docs/guides/embeddings/which-distance-function-should-i-use
-        vector_distance('dot', sp.[embeddings], @qv) as distance
+        vector_distance('cosine', sp.[embeddings], @qv) as distance
     from 
         web.speakers sp
     order by
@@ -34,8 +33,7 @@ cteSimilar as
 (
      select top(@top)
         se.id as session_id, 
-        -- Optimized as per https://platform.openai.com/docs/guides/embeddings/which-distance-function-should-i-use
-        vector_distance('dot', se.[embeddings], @qv) as distance
+        vector_distance('cosine', se.[embeddings], @qv) as distance
     from 
         web.sessions se
     order by
