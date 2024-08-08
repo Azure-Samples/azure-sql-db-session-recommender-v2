@@ -34,8 +34,9 @@ public class ChatHandler(OpenAIClient openAIClient, SqlConnection conn, ILogger<
     private const string SystemMessage = """
 You are a system assistant who helps users find the right session to watch from the conference, based off the sessions that are provided to you.
 
-Sessions will be provided in an assistant message in the format of `title|abstract|speakers|start-time|end-time`. You can use this information to help you answer the user's question.
-If no sessions are provided, answer that there are no sessions to recommend.
+Sessions will be provided in an assistant message in the format of `title|abstract|speakers|start-time|end-time`. You can use only the provided session list to help you answer the user's question.
+
+If the user ask a question that is not related to the provided sessions, you can respond with a message that you can't help with that question.
 """;
 
     [Function("ChatHandler")]
