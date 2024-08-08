@@ -35,6 +35,7 @@ public class ChatHandler(OpenAIClient openAIClient, SqlConnection conn, ILogger<
 You are a system assistant who helps users find the right session to watch from the conference, based off the sessions that are provided to you.
 
 Sessions will be provided in an assistant message in the format of `title|abstract|speakers|start-time|end-time`. You can use this information to help you answer the user's question.
+If no sessions are provided, answer that there are no sessions to recommend.
 """;
 
     [Function("ChatHandler")]
@@ -47,7 +48,7 @@ Sessions will be provided in an assistant message in the format of `title|abstra
         DynamicParameters p = new();
         p.Add("@text", history.Last().userPrompt);
         p.Add("@top", 25);
-        p.Add("@min_similarity", 0.70);
+        p.Add("@min_similarity", 0.30);
 
         using IDataReader foundSessions = await conn.ExecuteReaderAsync("[web].[find_sessions]", commandType: CommandType.StoredProcedure, param: p);
 
@@ -66,6 +67,8 @@ Sessions will be provided in an assistant message in the format of `title|abstra
                 Similarity: foundSessions.GetDouble(8)
             ));
         }
+
+        logger.LogInformation($"{sessions.Count} similar sessions found.");
 
         logger.LogInformation("Calling GPT...");
 

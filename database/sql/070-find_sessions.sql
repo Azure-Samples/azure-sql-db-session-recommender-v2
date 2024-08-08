@@ -1,7 +1,7 @@
 create or alter procedure [web].[find_sessions]
 @text nvarchar(max),
 @top int = 10,
-@min_similarity decimal(19,16) = 0.35
+@min_similarity decimal(19,16) = 0.30
 as
 if (@text is null) return;
 
