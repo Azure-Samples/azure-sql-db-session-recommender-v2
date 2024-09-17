@@ -170,10 +170,10 @@ values
 go
 ```
 
-immediately the deployed Azure Function will get executed in response to the `INSERT` statement. The Azure Function will call the OpenAI service to generate the text embedding for the session title and abstract, and then store the embedding in the database, specifically in the `web.sessions_embeddings` table.
+immediately the deployed Azure Function will get executed in response to the `INSERT` statement. The Azure Function will call the OpenAI service to generate the text embedding for the session title and abstract, and then store the embedding in the database, specifically in the `web.sessions` table.
 
 ```sql
-select * from web.sessions_embeddings
+select * from web.sessions
 ```
 
 You can now open the URL associated with the created Static Web App to see the session recommender in action. You can get the URL from the Static Web App overview page in the Azure portal.
@@ -194,6 +194,12 @@ npm install
 once finished, create a `./func/local.settings.json` and `.env` starting from provided samples files, and fill out the settings using the correct values for your environment.
 
 Go back to the sample root folder and then run:
+
+```bash
+swa build
+```
+
+to build the fronted and then start everything with:
 
 ```bash
 swa start 
