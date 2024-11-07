@@ -48,6 +48,7 @@ cteSimilar as
         web.sessions_speakers ss 
     inner join
         cteSimilarSpeakers sp on sp.speaker_id = ss.speaker_id
+        order by distance
 ),
 cteSimilar2 as (
     select top(@top)
@@ -55,6 +56,8 @@ cteSimilar2 as (
         rn = row_number() over (partition by session_id order by distance)
     from
         cteSimilar
+    order by 
+        distance
 ),
 cteSpeakers as
 (
