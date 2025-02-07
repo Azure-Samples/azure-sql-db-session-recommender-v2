@@ -168,6 +168,27 @@ insert into web.sessions_speakers
 values
     (1000, 5000)
 go
+
+insert into web.sessions 
+    (id, title, abstract, external_id, start_time, end_time, require_embeddings_update)
+values
+    (
+        1001,
+        'Unlock the Art of Pizza Making with John Doe!', 
+        'Whether you’re an avid home pizza oven enthusiast, contemplating a purchase, or nurturing dreams of launching your very own pizza venture, this course is tailor-made for you! Join John Doe, the visionary behind Great Pizza, as he guides you through the captivating world of pizza craftsmanship. With over six years of experience running his thriving pizza business, John has honed his skills to perfection, earning the title of a master pizzaiolo. Before embarking on his entrepreneurial journey, John—a former chef—also completed a pizza-making course at The School. Now, he’s excited to share his expertise with you in this hands-on workshop. During the course, you’ll learn to create three distinct pizza styles: Neapolitan, thin Roman “Tonda,” and Calzone. Dive into the art of dough preparation, experimenting with both high and low hydration doughs, all while adjusting temperatures to achieve pizza perfection. Don’t miss this opportunity to elevate your pizza-making game and impress your taste buds! ',
+        'S2',
+        '2024-06-01 11:00:00',
+        '2024-06-01 12:00:00',
+        1
+    )
+go
+
+insert into web.sessions_speakers
+    (session_id, speaker_id)
+values
+    (1001, 5000)
+go
+
 ```
 
 immediately the deployed Azure Function will get executed in response to the `INSERT` statement. The Azure Function will call the OpenAI service to generate the text embedding for the session title and abstract, and then store the embedding in the database, specifically in the `web.sessions_embeddings` table.
