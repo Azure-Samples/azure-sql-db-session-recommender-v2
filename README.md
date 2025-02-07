@@ -24,7 +24,7 @@ description: Build a session recommender using Jamstack and Event-Driven archite
 
 This sample demonstrates how to build a session recommender using Jamstack and Event-Driven architecture, using Azure SQL DB to store and search vectors embeddings generated using OpenAI. The solution is built using Azure Static Web Apps, Azure Functions, Azure SQL Database, and Azure OpenAI.
 
-A fully working, production ready, version of this sample, that has been used at [VS Live](https://vslive.com/) conferences, is available here: https://icy-beach-0b0dc380f.5.azurestaticapps.net/
+A fully working, production ready, version of this sample, that has been used at [VS Live](https://vslive.com/) conferences, is available here: https://ai.microsofthq.vslive.com/
 
 ![Retrieval Augmented Generator flow](./_docs/rag.png)
 
@@ -52,7 +52,7 @@ Azure SQL database can be used to easily and quickly perform vector similarity s
 The **native option** uses the new Vector Functions, recently introduced in Azure SQL database. Vector Functions are a set of functions that can be used to perform vector operations directly in the database. 
 
 > [!NOTE]  
-> Vector Functions are in Early Adopter Preview. Get access to the preview via https://aka.ms/azuresql-vector-eap-announcement
+> Vector Functions are in Public Preview. Learn the details about vectors in Azure SQL here: https://aka.ms/azure-sql-vector-public-preview
 
 ![](_assets/azure-sql-cosine-similarity-native.gif)
 
@@ -191,10 +191,10 @@ go
 
 ```
 
-immediately the deployed Azure Function will get executed in response to the `INSERT` statement. The Azure Function will call the OpenAI service to generate the text embedding for the session title and abstract, and then store the embedding in the database, specifically in the `web.sessions_embeddings` table.
+immediately the deployed Azure Function will get executed in response to the `INSERT` statement. The Azure Function will call the OpenAI service to generate the text embedding for the session title and abstract, and then store the embedding in the database, specifically in the `web.sessions` table.
 
 ```sql
-select * from web.sessions_embeddings
+select * from web.sessions
 ```
 
 You can now open the URL associated with the created Static Web App to see the session recommender in action. You can get the URL from the Static Web App overview page in the Azure portal.
@@ -215,6 +215,12 @@ npm install
 once finished, create a `./func/local.settings.json` and `.env` starting from provided samples files, and fill out the settings using the correct values for your environment.
 
 Go back to the sample root folder and then run:
+
+```bash
+swa build
+```
+
+to build the fronted and then start everything with:
 
 ```bash
 swa start 
