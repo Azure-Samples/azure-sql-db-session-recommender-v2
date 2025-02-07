@@ -1,6 +1,6 @@
 create or alter procedure [web].[get_embedding]
 @inputText nvarchar(max),
-@embedding varbinary(8000) output
+@embedding vector(1536) output
 as
 begin try
     declare @retval int;
@@ -31,7 +31,7 @@ if (@retval != 0) begin
 end;
 
 declare @re nvarchar(max) = json_query(@response, '$.result.data[0].embedding')
-set @embedding = json_array_to_vector(@re);
+set @embedding = cast(@re as vector(1536));
 
 return @retval
 go

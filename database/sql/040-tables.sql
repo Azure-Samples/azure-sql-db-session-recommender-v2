@@ -23,7 +23,7 @@ CREATE TABLE [web].[sessions]
     [tags] NVARCHAR (MAX) NULL,
     [recording_url] VARCHAR (1000) NULL,
     [require_embeddings_update] BIT DEFAULT ((0)) NOT NULL,
-    [embeddings] VARBINARY(8000) NULL,
+    [embeddings] VECTOR(1536) NULL,
 
     PRIMARY KEY CLUSTERED ([id] ASC),
     CHECK (isjson([tags])=(1)),
@@ -37,7 +37,7 @@ CREATE TABLE [web].[speakers]
     [external_id] VARCHAR (100) COLLATE Latin1_General_100_BIN2 NULL,
     [full_name] NVARCHAR (100) NOT NULL,
     [require_embeddings_update] BIT DEFAULT ((0)) NOT NULL,
-    [embeddings] VARBINARY(8000) NULL,
+    [embeddings] VECTOR(1536) NULL,
 
     PRIMARY KEY CLUSTERED ([id] ASC),
     UNIQUE NONCLUSTERED ([full_name] ASC)    

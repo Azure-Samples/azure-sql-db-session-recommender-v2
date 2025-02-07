@@ -6,7 +6,7 @@ as
 update 
     web.speakers 
 set 
-    embeddings = json_array_to_vector(@embeddings),
+    embeddings = cast(@embeddings as vector(1536)),
     require_embeddings_update = 0
 where   
     id = @id

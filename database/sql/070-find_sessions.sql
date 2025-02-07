@@ -10,7 +10,7 @@ declare @sid int = scope_identity();
 
 declare @startTime as datetime2(7) = sysdatetime()
 
-declare @retval int, @qv varbinary(8000);
+declare @retval int, @qv vector(1536);
 
 exec @retval = web.get_embedding @text, @qv output;
 
