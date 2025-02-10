@@ -54,7 +54,21 @@ The **native option** uses the new Vector Functions, recently introduced in Azur
 > [!NOTE]  
 > Vector Functions are in Public Preview. Learn the details about vectors in Azure SQL here: https://aka.ms/azure-sql-vector-public-preview
 
-![](_assets/azure-sql-cosine-similarity-native.gif)
+```sql
+DECLARE @embedding VECTOR(1536)
+
+EXEC [web].[get_embedding] 'I want to learn about security in SQL', @embedding OUTPUT
+
+SELECT TOP(10)
+    s.id,
+    s.title,
+    s.abstract,
+    VECTOR_DISTANCE('cosine', @embedding, s.embeddings) AS cosine_distance
+FROM
+    [web].[sessions] s
+ORDER BY
+    cosine_distance 
+```
 
 The **classic option** uses the classic T-SQL to perform vector operations, with the support for columnstore indexes for getting good performances.
 
